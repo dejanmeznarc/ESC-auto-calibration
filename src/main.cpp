@@ -77,9 +77,16 @@ Servo motors[MOTORS_NUM];
 void setup() {
     Serial.begin(500000);
     Serial.println(F("RESTART -----"));
-/*
+
     for (int i = 0; i < MOTORS_NUM; ++i) {
         motors[i].attach(motor_pins[i]);
+        motors[i].writeMicroseconds(1000);
+    }
+
+
+    delay(1000);
+    for (auto & motor : motors) {
+        motor.writeMicroseconds(1100);
     }
 
 
@@ -97,7 +104,7 @@ void setup() {
         }
         yield();
     }
-*/
+
 
 
     Serial.println("[INFO] Hello! Here is calibration procedure:");
