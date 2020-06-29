@@ -77,6 +77,11 @@ Servo motors[MOTORS_NUM];
 void setup() {
     Serial.begin(500000);
     Serial.println(F("RESTART -----"));
+
+    while (!Serial.available()) {
+        Serial.println("Press somethig to start");
+    }
+
     waitForSerial();
 
     Serial.println("[INFO] Hello! Here is calibration procedure:");
