@@ -77,16 +77,32 @@ Servo motors[MOTORS_NUM];
 void setup() {
     Serial.begin(500000);
     Serial.println(F("RESTART -----"));
-
-    while (!Serial.available()) {
-        Serial.println("Press somethig to start");
+/*
+    for (int i = 0; i < MOTORS_NUM; ++i) {
+        motors[i].attach(motor_pins[i]);
     }
 
-    waitForSerial();
+
+    while (1) {
+        if (Serial.available()){
+
+            int speed = Serial.parseInt();
+            for (int i = 0; i < MOTORS_NUM; ++i) {
+                motors[i].writeMicroseconds(speed);
+            }
+            Serial.println(speed);
+            while (Serial.available()){
+                Serial.read();
+            }
+        }
+        yield();
+    }
+*/
+
 
     Serial.println("[INFO] Hello! Here is calibration procedure:");
     Serial.println("[INFO] \t1. disconnect battery and propellers");
-    Serial.println("[INFO] ");
+    Serial.println("[INFO] \t2. connect battery");
     Serial.println("[INFO] \t3. ESC will make three beeps");
     Serial.println("[INFO] \t4. Listen for one short beep - then press key");
     Serial.println("[INFO] \t5. Listen for two beeps - then press key");
@@ -123,7 +139,8 @@ void calibration(int motor) {
 
 
     Serial.println("[CALIBRATION] \t2. connect battery");
-    Serial.println("[CALIBRATION] You will hear 3 beeps, \n than you will hear one SHORT BEEP - after that one press key!");
+    Serial.println(
+            "[CALIBRATION] You will hear 3 beeps, \n than you will hear one SHORT BEEP - after that one press key!");
     waitForSerial();
 
     Serial.println("> generaating 1ms pulse");
@@ -146,7 +163,9 @@ void calibration(int motor) {
 
 void waitForSerial() {
     // Wait for serial communication
-    while (!Serial.available()) {}
+    while (!Serial.available()) {
+        delay(1);
+    }
 
     //read everything we recieved
     while (Serial.available()) {
