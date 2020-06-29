@@ -24,12 +24,12 @@ void waitForSerial();
 /**
  * Define hou many motors do you want to calibrate
  */
-#define MOTORS_NUM 2
+#define MOTORS_NUM 4
 
 /**
  * Define PINS for ESC calibrations
  */
-const uint8_t motor_pins[MOTORS_NUM] = {15, 12};
+const uint8_t motor_pins[MOTORS_NUM] = {15, 13,12,14};
 
 
 /**
@@ -72,6 +72,7 @@ FastESC motors[MOTORS_NUM];
 #include <Servo.h>
 Servo motors[MOTORS_NUM];
 #endif
+
 
 
 void setup() {
